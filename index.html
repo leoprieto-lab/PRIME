@@ -406,6 +406,13 @@ input.ghost::placeholder { color: var(--gris-c); }
    INSPIRACIÓN — al final, textos nuevos
    ══════════════════════════════════════ */
 .inspiracion { padding: 78px 0 28px; }
+
+/* Sección de enlaces a la página de ofertas */
+.ofertas-links { padding: 74px 0 10px; }
+.lista-enlaces { margin: 30px 0 0; padding: 0; border-top: 1px solid var(--linea); }
+.lista-enlaces li { list-style: none; display: grid; gap: 7px; padding: 17px 0; border-bottom: 1px solid var(--linea); }
+.lista-enlaces small { color: var(--gris); font-size: 12.5px; line-height: 1.55; }
+.lista-enlaces a { justify-self: start; }
 .galeria {
   display: grid; grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: 210px; gap: 16px; margin-top: 32px;
@@ -630,8 +637,8 @@ footer { background: var(--bg); border-top: 1px solid var(--linea); padding: 64p
    ══════════════════════════════════════ */
 @media print {
   header, footer, .cookies, .hero, .indicadores, .detalle,
-  .inspiracion, .ofrecer, .toolbar, .por-pagina, .paginacion,
-  .fila-wa, .btn-limpiar, .hamburguesa, .lang { display: none !important; }
+  .inspiracion, .ofrecer, .ofertas-links, .toolbar, .por-pagina,
+  .paginacion, .fila-wa, .btn-limpiar, .hamburguesa, .lang { display: none !important; }
   .banda { background: #fff; border: none; padding: 0; }
   .hoja { border: none; padding: 0; }
   .showroom::before {
@@ -662,6 +669,7 @@ footer { background: var(--bg); border-top: 1px solid var(--linea); padding: 64p
       <a href="#indicadores">Indicadores</a>
       <a href="#nosotros">Nosotros</a>
       <a href="#showroom">Solicitudes</a>
+      <a href="#ofertas">Ofertas</a>
       <a href="#inspiracion">Inspiración</a>
       <a href="#ofrecer">Ofrecer mi inmueble</a>
       <a href="#contacto">Contacto</a>
@@ -849,6 +857,55 @@ footer { background: var(--bg); border-top: 1px solid var(--linea); padding: 64p
       </div>
     </section>
   </div>
+</div>
+
+<!-- ══ OFERTAS (enlaces a la página de ofertas) ══ -->
+<div class="wrap">
+  <section class="ofertas-links" id="ofertas">
+    <div class="reveal">
+      <p class="eyebrow">Ofertas</p>
+      <h2 class="titulo-seccion">Inmuebles disponibles</h2>
+      <p class="intro-seccion">Si lo que buscas es un inmueble, entra a nuestra página de ofertas: inmuebles en venta y arriendo de Bogotá y Sabana, con fichas y filtros. Entra directo a la sección que te interesa:</p>
+    </div>
+
+    <ul class="lista-enlaces reveal">
+      <li>
+        <a class="link-flecha" href="ofertas_publico.html">
+          Ver todas las ofertas
+          <svg width="26" height="8" viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 4h23M20 1l4 3-4 3"/></svg>
+        </a>
+        <small>Listado completo de inmuebles en venta y arriendo.</small>
+      </li>
+      <li>
+        <a class="link-flecha" href="ofertas_publico.html#ofertas">
+          Ofertas disponibles
+          <svg width="26" height="8" viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 4h23M20 1l4 3-4 3"/></svg>
+        </a>
+        <small>Busca por operación, tipo, zona, precio, estrato, área y habitaciones.</small>
+      </li>
+      <li>
+        <a class="link-flecha" href="ofertas_publico.html#destacadas">
+          Ofertas destacadas
+          <svg width="26" height="8" viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 4h23M20 1l4 3-4 3"/></svg>
+        </a>
+        <small>Selección con mejor ubicación, precio y fotografía.</small>
+      </li>
+      <li>
+        <a class="link-flecha" href="ofertas_publico.html#indicadores">
+          Ofertas publicadas
+          <svg width="26" height="8" viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 4h23M20 1l4 3-4 3"/></svg>
+        </a>
+        <small>Cifras actualizadas de inmuebles en venta y en arriendo.</small>
+      </li>
+      <li>
+        <a class="link-flecha" href="ofertas_publico.html#inspiracion">
+          Qué revisamos en cada oferta
+          <svg width="26" height="8" viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 4h23M20 1l4 3-4 3"/></svg>
+        </a>
+        <small>Criterios que aplicamos antes de publicar un inmueble.</small>
+      </li>
+    </ul>
+  </section>
 </div>
 
 <!-- ══ INSPIRACIÓN (al final) ══ -->
@@ -1547,7 +1604,7 @@ document.getElementById('btn-siguiente').addEventListener('click', () => {
       nombre: nombre,
       celular: celular,
       seccion: 'Ofrecer mi inmueble',
-      origen: 'indexRevisar.html',
+      origen: 'index.html',
       fecha: new Date().toISOString()
     };
 

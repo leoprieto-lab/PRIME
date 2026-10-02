@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Propiedades — Matchmaker inmobiliario: oferta y requerimiento</title>
+<meta name="description" content="Cruce de ofertas y requerimientos de inmuebles en Bogotá y Sabana: precio, zona, área, habitaciones y más, ponderados. Muestra con los 3 matches de más alta afinidad.">
+<meta property="og:title" content="Prime Propiedades — Matchmaker inmobiliario">
+<meta property="og:description" content="Oferta y requerimiento, uno frente al otro: mide la afinidad de cada match y solicita el servicio para tus clientes.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/logoPrime.jpg">
+<link rel="icon" href="images/logoPrime.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --acento:#B08D57; --tinta:#141414; --suave:#6b6b6b; --linea:#e6e2db;
+  --bg-suave:#faf8f5; --ok:#2f7d4f; --max:1200px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,sans-serif;
+  color:var(--tinta);background:#fff;line-height:1.62;
+  -webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif;font-weight:500;
+  line-height:1.14;margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+section{padding:86px 0}
+.eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--acento);font-weight:600;margin:0 0 14px}
+.titulo-seccion{font-size:clamp(1.85rem,3.4vw,2.8rem);margin-bottom:14px}
+.intro-seccion{max-width:64ch;color:var(--suave);margin:0 0 34px}
+.reveal{opacity:0;transform:translateY(18px);
+  transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+.sello{display:inline-block;font-size:.75rem;letter-spacing:.06em;
+  color:var(--suave);border:1px solid var(--linea);border-radius:99px;
+  padding:7px 15px;background:#fff}
+
+/* ── HEADER ── */
+#site-header{position:fixed;top:0;left:0;right:0;z-index:60;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--linea)}
+.header-inner{max-width:var(--max);margin:0 auto;padding:13px 24px;
+  display:flex;align-items:center;gap:20px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo img{height:50px;width:auto;object-fit:contain;border-radius:2px}
+.logo-marca{font-family:'Playfair Display',serif;font-size:1.06rem;
+  letter-spacing:.01em;white-space:nowrap}
+.menu{display:flex;gap:19px;margin-left:auto;align-items:center;
+  flex-wrap:wrap;justify-content:flex-end}
+.menu a{font-size:.85rem;color:#3a3a3a;transition:color .2s}
+.menu a:hover{color:var(--acento)}
+.menu a.dest{border:1px solid var(--acento);color:var(--acento);
+  border-radius:99px;padding:7px 15px;font-size:.78rem;font-weight:500}
+.menu a.dest:hover{background:var(--acento);color:#fff}
+.lang{display:flex;gap:4px;align-items:center;font-size:.78rem}
+.lang button{border:0;background:transparent;cursor:pointer;color:var(--suave);
+  font:inherit;padding:5px 7px;border-radius:4px}
+.lang button.activo{color:var(--tinta);background:#f2ede5}
+.hamburguesa{display:none;border:0;background:transparent;cursor:pointer;
+  padding:6px;flex-direction:column;gap:5px}
+.hamburguesa span{display:block;width:22px;height:1.5px;background:var(--tinta)}
+
+/* ── HERO ── */
+.hero{padding:158px 0 74px;position:relative;overflow:hidden;
+  background:
+    radial-gradient(900px 380px at 88% -8%, rgba(176,141,87,.14), transparent 60%),
+    linear-gradient(#fff, #fdfcfa)}
+.hero h1{font-size:clamp(2.3rem,5.6vw,4.1rem);max-width:17ch;
+  margin-bottom:20px}
+.lead{max-width:58ch;color:var(--suave);font-size:1.03rem;margin:0 0 26px}
+.link-flecha{display:inline-flex;gap:10px;align-items:center;
+  color:var(--acento);font-weight:500;font-size:.92rem;
+  border-bottom:1px solid transparent;padding-bottom:2px}
+.link-flecha:hover{border-color:var(--acento)}
+.hero-sello{margin-top:26px}
+
+/* ── INDICADORES ── */
+.indicadores{background:var(--bg-suave);border-block:1px solid var(--linea)}
+.cifras{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;
+  margin-top:32px}
+.cifra{background:#fff;border:1px solid var(--linea);border-radius:10px;
+  padding:30px 28px}
+.cifra .n{font-family:'Playfair Display',serif;
+  font-size:clamp(2.3rem,5vw,3.5rem);color:var(--acento);line-height:1}
+.cifra .t{font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;
+  color:var(--suave);margin-top:12px}
+.barras-titulo{font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;
+  color:var(--suave);margin:44px 0 14px}
+.barra{display:grid;grid-template-columns:minmax(150px,250px) 1fr;gap:18px;
+  align-items:center;padding:11px 0;border-bottom:1px dashed var(--linea);
+  font-size:.9rem}
+.barra-nombre{color:#3a3a3a}
+.fondo{height:9px;background:#eee7dc;border-radius:99px;overflow:hidden}
+.relleno{display:block;height:100%;border-radius:99px;
+  background:linear-gradient(90deg,var(--acento),#ddc7a2)}
+
+/* ── OFERTAS ── */
+.hoja{background:#fff;border:1px solid var(--linea);border-radius:14px;
+  overflow:hidden;box-shadow:0 24px 48px -40px rgba(20,20,20,.55)}
+.toolbar{padding:18px 20px;border-bottom:1px solid var(--linea);
+  background:var(--bg-suave);display:flex;flex-wrap:wrap;gap:11px;
+  align-items:center}
+.ghost{font:inherit;font-size:.85rem;padding:9px 12px;border:1px solid var(--linea);
+  border-radius:7px;background:#fff;color:var(--tinta);min-width:150px}
+.ghost:focus{outline:none;border-color:var(--acento)}
+.toolbar .buscar{flex:1 1 210px;min-width:180px}
+.toolbar .empuje{margin-left:auto}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:15px 20px 0}
+.chips:empty{display:none}
+.chip{display:inline-flex;gap:8px;align-items:center;font-size:.76rem;
+  background:#f4efe7;border:1px solid #e8ded0;border-radius:99px;
+  padding:6px 11px;cursor:pointer;color:#4a4a4a}
+.chip:hover{border-color:var(--acento);color:var(--acento)}
+.chip b{font-weight:600}
+.conteo{padding:15px 20px 4px;font-size:.82rem;color:var(--suave)}
+.oferta{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:22px;
+  padding:24px 20px;border-top:1px solid var(--linea);align-items:start}
+.oferta:hover{background:#fdfbf8}
+.dest-ico,.oferta .ico{width:50px;height:50px;border-radius:11px;
+  background:#f7f2ea;display:grid;place-items:center;color:var(--acento)}
+.oferta h3{font-size:1.14rem;margin-bottom:4px}
+.oferta .zona{font-size:.84rem;color:var(--suave)}
+.oferta .ref{font-size:.7rem;letter-spacing:.14em;color:#a8a29a;
+  text-transform:uppercase}
+.specs{display:flex;flex-wrap:wrap;gap:5px 14px;font-size:.82rem;
+  color:#4a4a4a;margin-top:11px}
+.badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
+.badge{font-size:.67rem;letter-spacing:.11em;text-transform:uppercase;
+  border:1px solid var(--linea);border-radius:5px;padding:4px 9px;
+  color:#4a4a4a;background:#fff}
+.badge.op-venta{border-color:#cfe3d6;background:#f2f9f5;color:#2f7d4f}
+.badge.op-arriendo{border-color:#d9e2ef;background:#f3f6fb;color:#34527d}
+.badge.tipo{border-color:#e9dcc7;background:#fbf6ee;color:#8a6c3f}
+.precio{text-align:right;min-width:190px}
+.precio .etq{display:block;font-size:.67rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--acento);margin-bottom:4px}
+.precio .principal{font-family:'Playfair Display',serif;font-size:1.5rem;
+  line-height:1.15}
+.precio .sec{display:block;font-size:.85rem;color:var(--suave);margin-top:4px}
+.acciones{display:flex;gap:10px;margin-top:16px;justify-content:flex-end;
+  flex-wrap:wrap}
+.btn{display:inline-flex;gap:8px;align-items:center;font-size:.82rem;
+  padding:9px 17px;border-radius:7px;border:1px solid var(--tinta);
+  background:var(--tinta);color:#fff;cursor:pointer;font-family:inherit;
+  transition:.2s}
+.btn:hover{background:var(--acento);border-color:var(--acento)}
+.btn.sec{background:transparent;color:var(--tinta)}
+.btn.sec:hover{background:var(--tinta);border-color:var(--tinta);color:#fff}
+.btn.wa{background:#f2f9f5;border-color:#bfe0cb;color:#257a42}
+.btn.wa:hover{background:#257a42;border-color:#257a42;color:#fff}
+.vacio{padding:56px 20px;text-align:center;color:var(--suave)}
+.paginacion{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;
+  padding:24px 20px;border-top:1px solid var(--linea);background:var(--bg-suave)}
+.paginacion button{border:1px solid var(--linea);background:#fff;border-radius:7px;
+  min-width:36px;padding:8px 11px;font:inherit;font-size:.83rem;cursor:pointer;
+  color:var(--tinta)}
+.paginacion button:hover{border-color:var(--acento);color:var(--acento)}
+.paginacion button.on{background:var(--tinta);border-color:var(--tinta);color:#fff}
+.paginacion button[disabled]{opacity:.4;cursor:default}
+
+/* ── DESTACADAS ── */
+.destacadas{background:var(--bg-suave);border-block:1px solid var(--linea)}
+.dest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+  gap:20px}
+.dest-card{background:#fff;border:1px solid var(--linea);border-radius:12px;
+  padding:24px}
+.dest-card h3{font-size:1.28rem;margin:14px 0 6px}
+.dest-esp{font-size:.83rem;color:var(--suave);margin:0 0 16px;min-height:2.4em}
+.dest-precio{border-top:1px dashed var(--linea);padding-top:14px}
+.dest-precio .etq{display:block;font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--acento)}
+.dest-precio .valor{display:block;font-family:'Playfair Display',serif;
+  font-size:1.6rem;line-height:1.2}
+.dest-precio .sec{font-size:.85rem;color:var(--suave)}
+.dest-acciones{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+
+/* ── NOSOTROS ── */
+.nosotros{display:grid;grid-template-columns:1.15fr .85fr;gap:46px;
+  align-items:start}
+.nosotros p{color:var(--suave);margin:0 0 18px;max-width:60ch}
+.nosotros .accion{display:flex;gap:12px;align-items:flex-start;
+  border:1px solid var(--linea);border-radius:10px;padding:18px;
+  margin-bottom:14px;background:#fff;transition:.2s}
+.nosotros .accion:hover{border-color:var(--acento)}
+.nosotros .accion strong{display:block;font-family:'Playfair Display',serif;
+  font-size:1.02rem;font-weight:500}
+.nosotros .accion span{font-size:.82rem;color:var(--suave)}
+
+/* ── INSPIRACIÓN ── */
+.galeria{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.galeria figure{margin:0}
+.galeria .foto{aspect-ratio:4/3;overflow:hidden;border-radius:10px;
+  background:var(--bg-suave)}
+.galeria img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.galeria figure:hover img{transform:scale(1.05)}
+.galeria figcaption{font-family:'Playfair Display',serif;font-size:1.02rem;
+  margin-top:12px}
+
+/* ── SOLICITAR ── */
+.solicitar{background:var(--bg-suave);border-block:1px solid var(--linea)}
+.solicitar-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;
+  align-items:start}
+.cruzada{display:block;border:1px solid var(--acento);border-radius:12px;
+  padding:22px;background:#fff;margin-bottom:26px}
+.cruzada strong{display:block;font-family:'Playfair Display',serif;
+  font-size:1.16rem;margin-bottom:8px}
+.cruzada span{font-size:.87rem;color:var(--suave)}
+.cruzada .ir{display:inline-flex;gap:9px;align-items:center;
+  margin-top:14px;color:var(--acento);font-size:.86rem;font-weight:500}
+.form-card{background:#fff;border:1px solid var(--linea);border-radius:14px;
+  padding:30px}
+.campo{margin-bottom:18px}
+.campo label{display:block;font-size:.78rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--suave);margin-bottom:7px}
+.campo input,.campo textarea{width:100%;font:inherit;font-size:.95rem;
+  padding:12px 14px;border:1px solid var(--linea);border-radius:8px;
+  background:#fff;color:var(--tinta);resize:vertical}
+.campo input:focus,.campo textarea:focus{outline:none;border-color:var(--acento)}
+.campo textarea{min-height:132px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.consent{display:flex;gap:11px;align-items:flex-start;font-size:.79rem;
+  color:var(--suave);margin-bottom:18px}
+.consent input{margin-top:4px;accent-color:var(--acento)}
+.form-msg{font-size:.85rem;margin:12px 0 0;min-height:1.2em}
+.form-msg.ok{color:var(--ok)}
+.form-msg.err{color:#b03030}
+.form-nota{font-size:.74rem;color:#9a948c;margin-top:14px}
+
+/* ── FOOTER ── */
+#contacto{background:#fff;border-top:1px solid var(--linea);padding:70px 0 0}
+.footer-cta{display:flex;gap:26px;flex-wrap:wrap;align-items:center;
+  padding-bottom:36px;border-bottom:1px solid var(--linea);
+  font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,2rem)}
+.footer-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+  padding:38px 0}
+.footer-cols h4{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;
+  font-family:Inter,sans-serif;color:var(--suave);font-weight:600;
+  margin-bottom:14px}
+.footer-cols a,.footer-cols p{display:block;font-size:.88rem;color:#3a3a3a;
+  margin-bottom:9px}
+.footer-cols a:hover{color:var(--acento)}
+.redes{display:flex;gap:14px;margin-top:14px;color:#3a3a3a}
+.redes a:hover{color:var(--acento)}
+.footer-bottom{display:flex;justify-content:space-between;gap:16px;
+  flex-wrap:wrap;padding:22px 0;border-top:1px solid var(--linea);
+  font-size:.78rem;color:var(--suave)}
+
+/* ── COOKIES ── */
+.cookies{position:fixed;left:0;right:0;bottom:0;z-index:70;background:#141414;
+  color:#f3f0ea;display:flex;gap:20px;align-items:center;flex-wrap:wrap;
+  justify-content:center;padding:15px 24px;font-size:.83rem;
+  transition:transform .4s ease}
+.cookies.oculta{transform:translateY(110%)}
+.cookies button{border:1px solid var(--acento);background:var(--acento);
+  color:#fff;border-radius:7px;padding:8px 18px;font:inherit;font-size:.82rem;
+  cursor:pointer}
+
+/* ── RESPONSIVE ── */
+@media (max-width:1080px){
+  .footer-cols{grid-template-columns:repeat(2,1fr)}
+  .galeria{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:900px){
+  .menu{position:fixed;top:76px;left:0;right:0;background:#fff;
+    border-bottom:1px solid var(--linea);flex-direction:column;
+    align-items:flex-start;gap:14px;padding:22px 24px;display:none}
+  .menu.abierto{display:flex}
+  .hamburguesa{display:flex;margin-left:auto}
+  .lang{order:2}
+  .nosotros,.solicitar-grid{grid-template-columns:1fr;gap:30px}
+  .oferta{grid-template-columns:1fr;gap:14px}
+  .precio{text-align:left;min-width:0}
+  .acciones{justify-content:flex-start}
+  .hero{padding-top:132px}
+}
+@media (max-width:640px){
+  section{padding:64px 0}
+  .cifras{grid-template-columns:1fr}
+  .logo img{height:44px}
+  .logo-marca{display:none}
+  .galeria{grid-template-columns:1fr}
+  .barra{grid-template-columns:1fr;gap:6px}
+  .footer-cols{grid-template-columns:1fr}
+}
+
+/* ── IMPRESIÓN ── */
+@media print{
+  #site-header,.cookies,.toolbar,.paginacion,.lang,
+  .hamburguesa,.dest-acciones,.acciones,.footer-cta{display:none !important}
+  body{font-size:11pt}
+  section{padding:16px 0}
+  .reveal{opacity:1 !important;transform:none !important}
+  .hoja{border:0;box-shadow:none}
+  .oferta{break-inside:avoid}
+  a[href^="http"]::after{content:""}
+}
+
+/* ── COMPONENTES DEL MATCH ── */
+
+/* ── CIFRAS (4 columnas) ── */
+.cifras.cuatro{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+
+/* ── PASOS ── */
+.pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:20px}
+.paso{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:26px}
+.paso .n{display:inline-grid;place-items:center;width:34px;height:34px;
+  border-radius:50%;background:#f7f2ea;color:var(--acento);font-size:.85rem;
+  font-weight:600;margin-bottom:14px}
+.paso h3{font-size:1.15rem;margin-bottom:8px}
+.paso p{font-size:.87rem;color:var(--suave);margin:0}
+
+/* ── TARJETAS DE MATCH ── */
+.match-card{background:#fff;border:1px solid var(--linea);border-radius:14px;
+  overflow:hidden;box-shadow:0 24px 48px -40px rgba(20,20,20,.55);margin-bottom:28px}
+.match-head{display:flex;flex-wrap:wrap;gap:16px;align-items:center;
+  justify-content:space-between;padding:20px 24px;background:var(--bg-suave);
+  border-bottom:1px solid var(--linea)}
+.match-head .badges{margin:0}
+.afinidad{display:flex;align-items:baseline;gap:10px}
+.afinidad .n{font-family:'Playfair Display',serif;font-size:2.1rem;
+  color:var(--acento);line-height:1}
+.afinidad .t{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--suave);max-width:130px;line-height:1.35}
+.match-grid{display:grid;grid-template-columns:1fr 54px 1fr}
+.lado{padding:24px}
+.lado.pide{border-right:1px dashed var(--linea)}
+.vs{align-self:center;justify-self:center;width:44px;height:44px;border-radius:50%;
+  background:#f7f2ea;color:var(--acento);display:grid;place-items:center;
+  font-size:.68rem;letter-spacing:.09em;font-weight:600}
+.lado h4{font-family:Inter,sans-serif;font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--acento);font-weight:600;margin-bottom:14px}
+.kv{display:flex;justify-content:space-between;gap:16px;padding:9px 0;
+  border-bottom:1px dashed var(--linea);font-size:.87rem}
+.kv:last-child{border-bottom:0}
+.kv .k{color:var(--suave)}
+.kv .v{font-weight:500;text-align:right}
+.kv .v.sin{color:#a8a29a;font-weight:400;font-style:italic}
+.match-score{padding:20px 24px;border-top:1px solid var(--linea)}
+.match-score h4{font-family:Inter,sans-serif;font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--suave);font-weight:600;margin-bottom:14px}
+.barra-sc{display:grid;grid-template-columns:minmax(110px,170px) 1fr auto;
+  gap:14px;align-items:center;padding:7px 0;font-size:.8rem}
+.barra-sc .pct{color:var(--suave);min-width:46px;text-align:right}
+.nota-score{font-size:.76rem;color:var(--suave);margin-top:14px}
+.match-pie{display:flex;gap:12px;flex-wrap:wrap;padding:0 24px 24px}
+@media (max-width:900px){
+  .match-grid{grid-template-columns:1fr}
+  .lado.pide{border-right:0;border-bottom:1px dashed var(--linea)}
+  .vs{margin:14px auto}
+}
+@media print{
+  .match-card{break-inside:avoid;box-shadow:none}
+  .reveal{opacity:1 !important;transform:none !important}
+}
+
+/* ── LISTAS / CTA ── */
+.checks{list-style:none;padding:0;margin:0 0 24px}
+.checks li{position:relative;padding:8px 0 8px 30px;font-size:.92rem;color:#3a3a3a;
+  border-bottom:1px dashed var(--linea)}
+.checks li:last-child{border-bottom:0}
+.checks li::before{content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;
+  border-radius:50%;background:var(--acento)}
+
+/* ── PAGINA INTERNA DE ASESORES ── */
+.aviso{background:#b03030;color:#fff;text-align:center;padding:9px 20px;
+  font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;position:fixed;
+  top:0;left:0;right:0;z-index:80}
+html.interna #site-header{top:34px}
+html.interna .hero{padding-top:186px}
+.tabla-wrap{background:#fff;border:1px solid var(--linea);border-radius:14px;
+  overflow:auto;max-height:640px;box-shadow:0 24px 48px -40px rgba(20,20,20,.55)}
+table.int{width:100%;border-collapse:collapse;font-size:.82rem}
+table.int th{position:sticky;top:0;background:#f4efe7;color:#3a3a3a;text-align:left;
+  font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:11px 12px;
+  border-bottom:1px solid var(--linea);white-space:nowrap;z-index:2}
+table.int td{padding:10px 12px;border-bottom:1px solid #f1ede7;vertical-align:top}
+table.int tbody tr:hover{background:#fdfbf8}
+table.int .num{text-align:right;white-space:nowrap}
+table.int a{color:var(--acento);text-decoration:underline}
+.toolbar-int{display:flex;flex-wrap:wrap;gap:11px;align-items:center;
+  margin-bottom:16px}
+.toolbar-int input{flex:1 1 260px;font:inherit;font-size:.88rem;padding:10px 13px;
+  border:1px solid var(--linea);border-radius:7px;background:#fff}
+.toolbar-int input:focus{outline:none;border-color:var(--acento)}
+.pill{display:inline-block;font-size:.68rem;letter-spacing:.08em;padding:3px 8px;
+  border-radius:5px;border:1px solid var(--linea);background:#fff;color:#4a4a4a}
+.pill.ok{border-color:#cfe3d6;background:#f2f9f5;color:#2f7d4f}
+.pill.no{border-color:#f0d6d6;background:#fdf4f4;color:#a33}
+.pill.warn{border-color:#e9dcc7;background:#fbf6ee;color:#8a6c3f}
+.mini{color:var(--suave);font-size:.74rem}
+.tabla-titulo{display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;
+  justify-content:space-between;margin:44px 0 14px}
+.tabla-titulo h3{font-size:1.35rem}
+@media (max-width:640px){
+  .aviso{position:static}
+  html.interna #site-header{top:0}
+  html.interna .hero{padding-top:132px}
+  table.int{font-size:.78rem}
+}
+
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html" aria-label="Prime Propiedades — inicio">
+      <img src="images/logoPrime.jpg" alt="Prime Propiedades" width="240" height="50">
+      <span class="logo-marca">Prime Propiedades</span>
+    </a>
+
+        <nav class="menu" id="menu">
+      <a href="index.html">Inicio</a>
+      <a href="index.html#ofertas">Ofertas</a>
+      <a href="busquedas.html">Requerimientos</a>
+      <a href="#como">C&oacute;mo funciona</a>
+      <a href="#ejemplos">Ejemplos de match</a>
+      <a class="dest" href="#solicitar">Solicitar matchmaker</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+
+    <div class="lang">
+      <button class="activo" data-lang="ES">ES</button>
+      <span>/</span>
+      <button data-lang="EN">EN</button>
+    </div>
+
+    <button class="hamburguesa" id="btn-menu" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <p class="eyebrow reveal">Matchmaker inmobiliario &middot; Muestra real</p>
+    <h1 class="reveal">Lo que pide el cliente y lo que ofrece el inventario, medidos</h1>
+    <p class="lead reveal">Cruzamos cada requerimiento de nuestros asesores contra
+      las ofertas publicadas: precio, zona, &aacute;rea, habitaciones, ba&ntilde;os,
+      parqueo, estrato y tipo, cada uno con su peso. Abajo van los tres matches
+      con m&aacute;s afinidad del &uacute;ltimo corte.</p>
+    <a class="link-flecha reveal" href="#ejemplos">
+      Ver los 3 ejemplos
+      <svg width="26" height="8" viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 4h23M20 1l4 3-4 3"/></svg>
+    </a>
+    <div class="hero-sello reveal"><span class="sello">Corte del 02/10/2026 &middot; 1.631 ofertas &middot; 418 requerimientos</span></div>
+  </div>
+</section>
+
+<!-- ══ INDICADORES ══ -->
+<section class="indicadores" id="indicadores">
+  <div class="wrap">
+    <p class="eyebrow reveal">&Uacute;ltimo corte</p>
+    <h2 class="titulo-seccion reveal">Oferta y demanda, en n&uacute;meros</h2>
+
+    <div class="cifras cuatro reveal">
+      <div class="cifra"><div class="n">1.631</div><div class="t">ofertas &uacute;nicas</div></div>
+      <div class="cifra"><div class="n">418</div><div class="t">requerimientos</div></div>
+      <div class="cifra"><div class="n">327</div><div class="t">con match &ge; 75%</div></div>
+      <div class="cifra"><div class="n">80,7%</div><div class="t">de cobertura</div></div>
+    </div>
+
+    <div class="reveal">
+      <p class="barras-titulo">Afinidad del mejor match por requerimiento (2025 pares evaluados)</p>
+      <div class="barra"><span class="barra-nombre"><45%</span><span class="fondo"><span class="relleno" style="width:2%"></span></span></div>      <div class="barra"><span class="barra-nombre">45-55%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">55-65%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">65-75%</span><span class="fondo"><span class="relleno" style="width:2%"></span></span></div>      <div class="barra"><span class="barra-nombre">75-85%</span><span class="fondo"><span class="relleno" style="width:12%"></span></span></div>      <div class="barra"><span class="barra-nombre">85-95%</span><span class="fondo"><span class="relleno" style="width:27%"></span></span></div>      <div class="barra"><span class="barra-nombre">95-100%</span><span class="fondo"><span class="relleno" style="width:100%"></span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CÓMO FUNCIONA ══ -->
+<section id="como">
+  <div class="wrap">
+    <p class="eyebrow reveal">C&oacute;mo funciona</p>
+    <h2 class="titulo-seccion reveal">Del chat al match, en tres pasos</h2>
+    <p class="intro-seccion reveal">Nada de coincidencias por azar: cada criterio
+      tiene un peso definido y cada pareja se punt&uacute;a por separado.</p>
+
+    <div class="pasos reveal">
+      <div class="paso">
+        <span class="n">1</span>
+        <h3>Leemos el requerimiento</h3>
+        <p>Extraemos zona, presupuesto, &aacute;rea, habitaciones, ba&ntilde;os,
+          parqueo, estrato y tipo desde la conversaci&oacute;n con el cliente,
+          aunque el asesor no los haya puesto en campos separados.</p>
+      </div>
+      <div class="paso">
+        <span class="n">2</span>
+        <h3>Filtramos el inventario</h3>
+        <p>Solo compiten ofertas de la misma operaci&oacute;n (venta/arriendo),
+          misma familia de inmueble, con precio publicado y en la misma ciudad.
+          Los anuncios repetidos se eliminan antes de comparar.</p>
+      </div>
+      <div class="paso">
+        <span class="n">3</span>
+        <h3>Ponderamos y ordenamos</h3>
+        <p>Cada criterio aporta su peso y el total da la afinidad. Se quedan los
+          5 mejores matches de cada requerimiento; para marcar &laquo;match&raquo;
+          se exige &ge; 75% de afinidad y al menos 60% del peso evaluado.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:44px">
+      <p class="barras-titulo">Peso de cada criterio (sobre 100)</p>
+      <div class="barra"><span class="barra-nombre">Precio &middot; 50</span><span class="fondo"><span class="relleno" style="width:100%"></span></span></div>
+      <div class="barra"><span class="barra-nombre">Zona &middot; 20</span><span class="fondo"><span class="relleno" style="width:40%"></span></span></div>
+      <div class="barra"><span class="barra-nombre">&Aacute;rea &middot; 15</span><span class="fondo"><span class="relleno" style="width:30%"></span></span></div>
+      <div class="barra"><span class="barra-nombre">Habitaciones &middot; 10</span><span class="fondo"><span class="relleno" style="width:20%"></span></span></div>
+      <div class="barra"><span class="barra-nombre">Ba&ntilde;os &middot; 2</span><span class="fondo"><span class="relleno" style="width:4%"></span></span></div>
+      <div class="barra"><span class="barra-nombre">Parqueo &middot; 1,5</span><span class="fondo"><span class="relleno" style="width:3%"></span></span></div>
+      <div class="barra"><span class="barra-nombre">Estrato &middot; 1</span><span class="fondo"><span class="relleno" style="width:2%"></span></span></div>
+      <div class="barra"><span class="barra-nombre">Tipo &middot; 0,5</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>
+      <p class="intro-seccion reveal" style="margin-top:26px">Si un dato no existe
+        (por ejemplo el cliente no dio &aacute;rea), ese peso no se descuenta en
+        contra: se redistribuye y la fila queda marcada con su confianza
+        (Alta &ge; 75%, Media &ge; 50%, Baja &lt; 50% de peso evaluado). Los barrios
+        se reconocen tambi&eacute;n por su nombre corto: <strong>SANTAS</strong>
+        equivale a Santa Ana, Santa Bibiana, Santa B&aacute;rbara y Santa Paula.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EJEMPLOS DE MATCH ══ -->
+<section class="destacadas" id="ejemplos">
+  <div class="wrap">
+    <p class="eyebrow reveal">Muestra</p>
+    <h2 class="titulo-seccion reveal">Los tres matches con m&aacute;s afinidad</h2>
+    <p class="intro-seccion reveal">Requerimiento real a la izquierda, oferta real
+      a la derecha y el desglose del puntaje abajo. Los datos de clientes y
+      asesores no se publican.</p>
+
+
+    <article class="match-card reveal">
+      <div class="match-head">
+        <div>
+          <p class="eyebrow" style="margin-bottom:8px">Match #1</p>
+          <div class="badges"><span class="badge op-venta">COMPRA</span><span class="badge tipo">Apartamento</span><span class="badge">Confianza Alta</span></div>
+        </div>
+        <div class="afinidad">
+          <span class="n">100%</span>
+          <span class="t">de afinidad<br>95% del peso evaluado</span>
+        </div>
+      </div>
+
+      <div class="match-grid">
+        <div class="lado pide">
+          <h4>Lo que pide el cliente</h4>
+      <div class="kv"><span class="k">Operación</span><span class="v">COMPRA</span></div>
+      <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
+      <div class="kv"><span class="k">Zona pedida</span><span class="v">Rosales</span></div>
+      <div class="kv"><span class="k">Área mínima</span><span class="v">200 m²</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v">3</span></div>
+      <div class="kv"><span class="k">Baños</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Parqueadero</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Presupuesto</span><span class="v">$2.400 M</span></div>
+        </div>
+        <div class="vs">VS</div>
+        <div class="lado oferta-lado">
+          <h4>La oferta que encaja</h4>
+      <div class="kv"><span class="k">Operación</span><span class="v">VENTA</span></div>
+      <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
+      <div class="kv"><span class="k">Zona</span><span class="v">Rosales Bajo</span></div>
+      <div class="kv"><span class="k">Área</span><span class="v">218 m²</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v">3</span></div>
+      <div class="kv"><span class="k">Baños</span><span class="v">5</span></div>
+      <div class="kv"><span class="k">Parqueadero</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Estrato</span><span class="v">6</span></div>
+      <div class="kv"><span class="k">Precio publicado</span><span class="v">$2.350 M</span></div>
+      <div class="kv"><span class="k">Diferencia</span><span class="v">-2,1% vs presupuesto</span></div>
+        </div>
+      </div>
+
+      <div class="match-score">
+        <h4>C&oacute;mo se reparte el puntaje</h4>
+        <div class="barra-sc"><span class="barra-nombre">Precio (50)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Zona (20)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Área (15)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Habitaciones (10)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <p class="nota-score">zona exacta: rosales &middot; criterios comparados:
+          precio, zona, area, hab, tipo &middot; se evaluaron 978 ofertas para este
+          requerimiento.</p>
+      </div>
+
+      <div class="match-pie">
+        <a class="btn sec" href="index.html#ofertas">Ver ofertas publicadas</a>
+        <a class="btn sec" href="busquedas.html" target="_blank" rel="noopener">Ver requerimientos activos</a>
+      </div>
+    </article>
+
+    <article class="match-card reveal">
+      <div class="match-head">
+        <div>
+          <p class="eyebrow" style="margin-bottom:8px">Match #2</p>
+          <div class="badges"><span class="badge op-venta">COMPRA</span><span class="badge tipo">Apartamento</span><span class="badge">Confianza Alta</span></div>
+        </div>
+        <div class="afinidad">
+          <span class="n">100%</span>
+          <span class="t">de afinidad<br>82% del peso evaluado</span>
+        </div>
+      </div>
+
+      <div class="match-grid">
+        <div class="lado pide">
+          <h4>Lo que pide el cliente</h4>
+      <div class="kv"><span class="k">Operación</span><span class="v">COMPRA</span></div>
+      <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
+      <div class="kv"><span class="k">Zona pedida</span><span class="v">Chicó Reservado</span></div>
+      <div class="kv"><span class="k">Área mínima</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Baños</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Parqueadero</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Presupuesto</span><span class="v">$1.000 M</span></div>
+        </div>
+        <div class="vs">VS</div>
+        <div class="lado oferta-lado">
+          <h4>La oferta que encaja</h4>
+      <div class="kv"><span class="k">Operación</span><span class="v">VENTA</span></div>
+      <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
+      <div class="kv"><span class="k">Zona</span><span class="v">Chicó</span></div>
+      <div class="kv"><span class="k">Área</span><span class="v">123.44 m²</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Baños</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Parqueadero</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Estrato</span><span class="v">6</span></div>
+      <div class="kv"><span class="k">Precio publicado</span><span class="v">$995 M</span></div>
+      <div class="kv"><span class="k">Diferencia</span><span class="v">-0,5% vs presupuesto</span></div>
+        </div>
+      </div>
+
+      <div class="match-score">
+        <h4>C&oacute;mo se reparte el puntaje</h4>
+        <div class="barra-sc"><span class="barra-nombre">Precio (50)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Zona (20)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Habitaciones (10)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Parqueo (1,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <p class="nota-score">zona exacta: chico &middot; criterios comparados:
+          precio, zona, hab, parqueo, tipo &middot; se evaluaron 978 ofertas para este
+          requerimiento.</p>
+      </div>
+
+      <div class="match-pie">
+        <a class="btn sec" href="index.html#ofertas">Ver ofertas publicadas</a>
+        <a class="btn sec" href="busquedas.html" target="_blank" rel="noopener">Ver requerimientos activos</a>
+      </div>
+    </article>
+
+    <article class="match-card reveal">
+      <div class="match-head">
+        <div>
+          <p class="eyebrow" style="margin-bottom:8px">Match #3</p>
+          <div class="badges"><span class="badge op-venta">ARRIENDO</span><span class="badge tipo">Apartaestudio</span><span class="badge">Confianza Alta</span></div>
+        </div>
+        <div class="afinidad">
+          <span class="n">99,8%</span>
+          <span class="t">de afinidad<br>81% del peso evaluado</span>
+        </div>
+      </div>
+
+      <div class="match-grid">
+        <div class="lado pide">
+          <h4>Lo que pide el cliente</h4>
+      <div class="kv"><span class="k">Operación</span><span class="v">ARRIENDO</span></div>
+      <div class="kv"><span class="k">Tipo</span><span class="v">Apartaestudio</span></div>
+      <div class="kv"><span class="k">Zona pedida</span><span class="v">Virrey</span></div>
+      <div class="kv"><span class="k">Área mínima</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v">1</span></div>
+      <div class="kv"><span class="k">Baños</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Parqueadero</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Presupuesto</span><span class="v">$4.000.000/mes</span></div>
+        </div>
+        <div class="vs">VS</div>
+        <div class="lado oferta-lado">
+          <h4>La oferta que encaja</h4>
+      <div class="kv"><span class="k">Operación</span><span class="v">ARRIENDO</span></div>
+      <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
+      <div class="kv"><span class="k">Zona</span><span class="v">Chico Virrey</span></div>
+      <div class="kv"><span class="k">Área</span><span class="v">55 m²</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v">1</span></div>
+      <div class="kv"><span class="k">Baños</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Parqueadero</span><span class="v">1</span></div>
+      <div class="kv"><span class="k">Estrato</span><span class="v">6</span></div>
+      <div class="kv"><span class="k">Precio publicado</span><span class="v">$4.000.000/mes</span></div>
+      <div class="kv"><span class="k">Diferencia</span><span class="v">+0,0% vs presupuesto</span></div>
+        </div>
+      </div>
+
+      <div class="match-score">
+        <h4>C&oacute;mo se reparte el puntaje</h4>
+        <div class="barra-sc"><span class="barra-nombre">Precio (50)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Zona (20)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Habitaciones (10)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:70%"></span></span><span class="pct">70%</span></div>
+        <p class="nota-score">zona exacta: virrey &middot; criterios comparados:
+          precio, zona, hab, tipo &middot; se evaluaron 397 ofertas para este
+          requerimiento.</p>
+      </div>
+
+      <div class="match-pie">
+        <a class="btn sec" href="index.html#ofertas">Ver ofertas publicadas</a>
+        <a class="btn sec" href="busquedas.html" target="_blank" rel="noopener">Ver requerimientos activos</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ══ SOLICITAR EL MATCHMAKER ══ -->
+<div class="wrap">
+  <section class="solicitar" id="solicitar">
+    <div class="solicitar-grid">
+      <div class="reveal">
+        <p class="eyebrow">Para asesores</p>
+        <h2 class="titulo-seccion">&iquest;Quieres el Matchmaker para tus clientes?</h2>
+        <p class="intro-seccion">Env&iacute;anos tus requerimientos y los cruzamos
+          contra toda la oferta activa. Recibes el Top 5 de matches por cliente,
+          con afinidad, confianza y la oferta exacta que encaja, listo para
+          presentar.</p>
+
+        <ul class="checks">
+          <li>Afinidad porcentual por match, con el desglose de precio, zona, &aacute;rea y m&aacute;s.</li>
+          <li>Top 5 de ofertas por cada uno de tus requerimientos.</li>
+          <li>Marca de confianza cuando falta alg&uacute;n dato del cliente.</li>
+          <li>Resultado en Excel, listo para filtrar y compartir con el cliente.</li>
+        </ul>
+
+        <a class="cruzada" href="busquedas.html" target="_blank" rel="noopener">
+          <strong>&iquest;Ya tienes un cliente activo?</strong>
+          <span>Revisa primero lo que est&aacute;n pidiendo los compradores y
+            arrendatarios: presupuesto real, zona concreta y nivel de urgencia.</span>
+          <span class="ir">Ver los requerimientos activos &#8599;</span>
+        </a>
+      </div>
+
+      <div class="form-card reveal">
+        <form id="form-match" novalidate>
+          <div class="campo">
+            <label for="i-nombre">Nombre del asesor *</label>
+            <input id="i-nombre" name="nombre" type="text" maxlength="80"
+                   autocomplete="name" required>
+          </div>
+
+          <div class="campo">
+            <label for="i-celular">Celular *</label>
+            <input id="i-celular" name="celular" type="tel" maxlength="20"
+                   autocomplete="tel" inputmode="tel" required>
+          </div>
+
+          <div class="campo">
+            <label for="i-necesita">Qu&eacute; necesitas *</label>
+            <textarea id="i-necesita" name="necesita" maxlength="500"
+              placeholder="Cuenta brevemente: cu&aacute;ntos requerimientos tienes, en qu&eacute; zonas y para cu&aacute;ndo."
+              required></textarea>
+          </div>
+
+          <div class="hp" aria-hidden="true">
+            <label for="i-empresa">Empresa</label>
+            <input id="i-empresa" name="empresa" type="text" tabindex="-1"
+                   autocomplete="off">
+          </div>
+
+          <label class="consent">
+            <input id="i-consent" type="checkbox" required>
+            <span>Autorizo el tratamiento de mis datos personales para ser
+              contactado por Prime Propiedades. No se comparten con terceros
+              ni se usan para publicidad.</span>
+          </label>
+
+          <button class="btn" id="btn-enviar" type="submit">Solicitar matchmaker</button>
+          <p class="form-msg" id="form-msg" role="status" aria-live="polite"></p>
+          <p class="form-nota">Env&iacute;o cifrado por HTTPS. Tus datos se guardan
+            &uacute;nicamente en nuestro sistema privado: no se publican en esta
+            p&aacute;gina ni se almacenan en tu navegador.</p>
+        </form>
+
+        <noscript>
+          <p class="form-nota" style="margin-top:18px">Sin JavaScript,
+            escr&iacute;benos directo por <a href="https://wa.me/573132349166">WhatsApp</a>
+            al +57 313 234 9166.</p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer id="contacto">
+  <div class="wrap">
+    <div class="footer-cta">
+      <a href="mailto:prieto.leonardo@gmail.com">Contáctanos</a>
+      <a class="link-flecha" href="https://wa.me/573132349166" target="_blank" rel="noopener">
+        Escribir por WhatsApp
+        <svg width="26" height="8" viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 4h23M20 1l4 3-4 3"/></svg>
+      </a>
+    </div>
+
+    <div class="footer-cols">
+      <div>
+        <h4>Correo</h4>
+        <a href="mailto:prieto.leonardo@gmail.com">prieto.leonardo@gmail.com</a>
+        <a href="mailto:iapruebas2025@gmail.com">iapruebas2025@gmail.com</a>
+      </div>
+      <div>
+        <h4>Teléfonos</h4>
+        <a href="tel:+573106873708">+57 310 6873708</a>
+        <a href="tel:+573132349166">+57 313 234 9166</a>
+      </div>
+      <div>
+        <h4>Dirección</h4>
+        <p>Avda. Cra. 30 #26-31<br>Bogotá D.C., Colombia</p>
+        <div class="redes">
+          <a href="https://www.instagram.com/primepropiedades1/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.facebook.com/primepropiedades/" target="_blank" rel="noopener" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 3h-3a5 5 0 0 0-5 5v3H4v4h3v8h4v-8h3l1-4h-4V8a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.linkedin.com/in/leonardo-prieto-a032b21a/?isSelfProfile=true" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-13h4v1.5A6 6 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://www.youtube.com/@PrimePropiedades1" target="_blank" rel="noopener" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10.5 9.2 15 12l-4.5 2.8z" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://wa.me/573132349166" target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.5 8.5 0 0 1-12.7 7.4L3 20.5l1.7-5.1A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 9.5c0 4 2 6 6 6 .8 0 1.5-.7 1.5-1.5l-2-1-1 1c-1.2-.6-2.4-1.8-3-3l1-1-1-2c-.8 0-1.5.7-1.5 1.5z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Prime Propiedades</h4>
+        <a href="busquedas.html" target="_blank" rel="noopener">Compradores buscando ↗</a>
+        <a href="https://www.youtube.com/@PrimePropiedades1" target="_blank" rel="noopener">Canal de YouTube ↗</a>
+        <a href="index.html#ofertas">Ofertas disponibles</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Prime Propiedades — Bogotá y Sabana. Todos los derechos reservados.</span>
+      <span>Aviso de privacidad · Términos</span>
+    </div>
+  </div>
+</footer>
+
+<div class="cookies" id="barra-cookies">
+  <span>Usamos cookies para mejorar tu navegación. Al continuar, aceptas
+    nuestra política de privacidad.</span>
+  <button id="cookies-aceptar" type="button">Aceptar</button>
+</div>
+
+<script>
+"use strict";
+const WA_NUM = '573132349166';
+const FORM_ENDPOINT = '';
+
+/* ── MENÚ MÓVIL ── */
+document.getElementById('btn-menu').addEventListener('click', () => {
+  document.getElementById('menu').classList.toggle('abierto');
+});
+Array.from(document.querySelectorAll('#menu a')).forEach(a =>
+  a.addEventListener('click', () =>
+    document.getElementById('menu').classList.remove('abierto')));
+
+/* ── REVEAL ── */
+(function(){
+  const items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)){
+    items.forEach(el => el.classList.add('visible'));
+    return;
+  }
+  const io = new IntersectionObserver((entradas) => {
+    entradas.forEach(e => { if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  items.forEach(el => io.observe(el));
+})();
+
+/* ── FORMULARIO: SOLICITAR MATCHMAKER ── */
+(function(){
+  const form = document.getElementById('form-match');
+  if (!form) return;
+  const msg = document.getElementById('form-msg');
+  const btn = document.getElementById('btn-enviar');
+  const inicio = Date.now();
+  const decir = (clase, texto) => { msg.className = 'form-msg ' + clase; msg.textContent = texto; };
+  const exito = t => decir('ok', t);
+  const limpiar = t => String(t).replace(/[<>]/g, '').trim().slice(0, 500);
+  const CEL = /^(\+?57)?\s?3\d{9}$/;
+
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+
+    if (document.getElementById('i-empresa').value !== ''){
+      exito('¡Listo! Recibimos tus datos.');
+      form.reset();
+      return;
+    }
+    if (Date.now() - inicio < 1500){
+      decir('err', 'Espera un segundo y vuelve a intentarlo.');
+      return;
+    }
+
+    const nombre = limpiar(document.getElementById('i-nombre').value);
+    const celular = limpiar(document.getElementById('i-celular').value).replace(/[\s-]/g, '');
+    const necesita = limpiar(document.getElementById('i-necesita').value);
+
+    if (nombre.length < 2){ decir('err', 'Escribe tu nombre completo.'); return; }
+    if (!CEL.test(celular)){ decir('err', 'Escribe un celular colombiano válido (3001234567).'); return; }
+    if (necesita.length < 10){ decir('err', 'Cuéntanos qué necesitas para el match.'); return; }
+    if (!document.getElementById('i-consent').checked){
+      decir('err', 'Debes autorizar el tratamiento de datos para continuar.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+
+    const payload = {
+      nombre: nombre, celular: celular, descripcion: necesita,
+      seccion: 'Matchmaker inmobiliario', origen: 'match.html',
+      fecha: new Date().toISOString()
+    };
+
+    try {
+      if (FORM_ENDPOINT){
+        if (!/^https:\/\//i.test(FORM_ENDPOINT)) throw new Error('El endpoint debe ser HTTPS');
+        const ctrl = new AbortController();
+        const reloj = setTimeout(() => ctrl.abort(), 12000);
+        const r = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json','Accept':'application/json'},
+          body: JSON.stringify(payload), signal: ctrl.signal
+        });
+        clearTimeout(reloj);
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        exito('¡Listo! Recibimos tu solicitud. Un asesor te contactará muy pronto.');
+        form.reset();
+      } else {
+        const texto =
+          'Hola, quiero solicitar el servicio de Matchmaker inmobiliario.\n' +
+          'Asesor: ' + nombre + '\n' +
+          'Celular: ' + celular + '\n' +
+          'Necesito: ' + necesita;
+        window.open('https://wa.me/' + WA_NUM + '?text=' +
+                    encodeURIComponent(texto), '_blank', 'noopener');
+        exito('¡Listo! Se abrió WhatsApp con tus datos; presiona enviar para completar la solicitud.');
+      }
+    } catch (err){
+      decir('err', 'No pudimos enviar tus datos. Escríbenos por WhatsApp al +57 313 234 9166.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Solicitar matchmaker';
+    }
+  });
+})();
+
+/* ── COOKIES ── */
+(function(){
+  const barra = document.getElementById('barra-cookies');
+  try { if (localStorage.getItem('cookies-ok') === '1') barra.classList.add('oculta'); }
+  catch (e) {}
+  document.getElementById('cookies-aceptar').addEventListener('click', () => {
+    barra.classList.add('oculta');
+    try { localStorage.setItem('cookies-ok', '1'); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>

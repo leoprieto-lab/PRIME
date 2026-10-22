@@ -43,7 +43,7 @@ section{padding:86px 0}
 
 /* ── HEADER ── */
 #site-header{position:fixed;top:0;left:0;right:0;z-index:60;
-  background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
+  background:rgba(255,255,255,.95);
   border-bottom:1px solid var(--linea)}
 .header-inner{max-width:var(--max);margin:0 auto;padding:13px 24px;
   display:flex;align-items:center;gap:20px}
@@ -66,6 +66,27 @@ section{padding:86px 0}
 .hamburguesa{display:none;border:0;background:transparent;cursor:pointer;
   padding:6px;flex-direction:column;gap:5px}
 .hamburguesa span{display:block;width:22px;height:1.5px;background:var(--tinta)}
+
+.cta-ofrecer {
+  border: 1px solid var(--acento); color: var(--acento);
+  border-radius: 99px;
+  padding: 7px 15px; white-space: nowrap; flex: none;
+  font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+  font-weight: 500; transition: background .3s, color .3s;
+}
+.cta-ofrecer:hover { background: var(--acento); color: #fff; }
+
+/* El menú tiene 8 enlaces en versalitas con tracking y, con el boton del
+   CTA aparte, ya no caben en una fila: por debajo de 1.280 px se salía por
+   la derecha y pisaba las secciones. Se reaprovecha el desplegable que ya
+   usaba el móvil (lo abre el JS con la clase .abierto sobre #menu). */
+@media (max-width:1280px){
+  .menu{position:fixed;top:76px;left:0;right:0;background:#fff;
+    border-bottom:1px solid var(--linea);flex-direction:column;
+    align-items:flex-start;gap:14px;padding:22px 24px;display:none}
+  .menu.abierto{display:flex}
+  .hamburguesa{display:flex;margin-left:auto}
+}
 
 /* ── HERO ── */
 .hero{padding:158px 0 74px;position:relative;overflow:hidden;
@@ -112,6 +133,9 @@ section{padding:86px 0}
 .ghost:focus{outline:none;border-color:var(--acento)}
 .toolbar .buscar{flex:1 1 210px;min-width:180px}
 .toolbar .empuje{margin-left:auto}
+.segmento{display:inline-flex;align-items:center;gap:6px}
+.segmento i{font-style:normal;color:var(--suave)}
+.ghost.mini{width:106px;padding:9px 8px;text-align:center}
 .chips{display:flex;flex-wrap:wrap;gap:8px;padding:15px 20px 0}
 .chips:empty{display:none}
 .chip{display:inline-flex;gap:8px;align-items:center;font-size:.76rem;
@@ -431,6 +455,8 @@ table.int a{color:var(--acento);text-decoration:underline}
       <a class="dest" href="#solicitar">Solicitar matchmaker</a>
     </nav>
 
+    <a class="cta-ofrecer" href="#solicitar">Ofrecer mi inmueble ↗</a>
+
     <div class="lang">
       <button class="activo" data-lang="ES">ES</button>
       <span>/</span>
@@ -456,7 +482,7 @@ table.int a{color:var(--acento);text-decoration:underline}
       Ver los 3 ejemplos
       <svg width="26" height="8" viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 4h23M20 1l4 3-4 3"/></svg>
     </a>
-    <div class="hero-sello reveal"><span class="sello">Corte del 21/10/2026 &middot; 4.320 ofertas &middot; 2795 requerimientos</span></div>
+    <div class="hero-sello reveal"><span class="sello">Corte del 22/10/2026 &middot; 4.258 ofertas &middot; 2623 requerimientos</span></div>
   </div>
 </section>
 
@@ -467,15 +493,15 @@ table.int a{color:var(--acento);text-decoration:underline}
     <h2 class="titulo-seccion reveal">Oferta y demanda, en n&uacute;meros</h2>
 
     <div class="cifras cuatro reveal">
-      <div class="cifra"><div class="n">4.320</div><div class="t">ofertas &uacute;nicas</div></div>
-      <div class="cifra"><div class="n">2795</div><div class="t">requerimientos</div></div>
-      <div class="cifra"><div class="n">1864</div><div class="t">con match &ge; 75%</div></div>
-      <div class="cifra"><div class="n">70,1%</div><div class="t">de cobertura</div></div>
+      <div class="cifra"><div class="n">4.258</div><div class="t">ofertas &uacute;nicas</div></div>
+      <div class="cifra"><div class="n">2623</div><div class="t">requerimientos</div></div>
+      <div class="cifra"><div class="n">1741</div><div class="t">con match &ge; 75%</div></div>
+      <div class="cifra"><div class="n">69,9%</div><div class="t">de cobertura</div></div>
     </div>
 
     <div class="reveal">
-      <p class="barras-titulo">Afinidad del mejor match por requerimiento (13190 pares evaluados)</p>
-      <div class="barra"><span class="barra-nombre"><45%</span><span class="fondo"><span class="relleno" style="width:2%"></span></span></div>      <div class="barra"><span class="barra-nombre">45-55%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">55-65%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">65-75%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">75-85%</span><span class="fondo"><span class="relleno" style="width:6%"></span></span></div>      <div class="barra"><span class="barra-nombre">85-95%</span><span class="fondo"><span class="relleno" style="width:13%"></span></span></div>      <div class="barra"><span class="barra-nombre">95-100%</span><span class="fondo"><span class="relleno" style="width:100%"></span></span></div>
+      <p class="barras-titulo">Afinidad del mejor match por requerimiento (12340 pares evaluados)</p>
+      <div class="barra"><span class="barra-nombre"><45%</span><span class="fondo"><span class="relleno" style="width:2%"></span></span></div>      <div class="barra"><span class="barra-nombre">45-55%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">55-65%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">65-75%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">75-85%</span><span class="fondo"><span class="relleno" style="width:6%"></span></span></div>      <div class="barra"><span class="barra-nombre">85-95%</span><span class="fondo"><span class="relleno" style="width:14%"></span></span></div>      <div class="barra"><span class="barra-nombre">95-100%</span><span class="fondo"><span class="relleno" style="width:100%"></span></span></div>
     </div>
   </div>
 </section>
@@ -590,7 +616,7 @@ table.int a{color:var(--acento);text-decoration:underline}
         <div class="barra-sc"><span class="barra-nombre">Habitaciones (10)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <p class="nota-score">zona exacta: virrey &middot; criterios comparados:
-          precio, zona, area, hab, tipo &middot; se evaluaron 692 ofertas para este
+          precio, zona, area, hab, tipo &middot; se evaluaron 674 ofertas para este
           requerimiento.</p>
       </div>
 
@@ -605,64 +631,6 @@ table.int a{color:var(--acento);text-decoration:underline}
       <div class="match-head">
         <div>
           <p class="eyebrow" style="margin-bottom:8px">Match #2</p>
-          <div class="badges"><span class="badge op-venta">ARRIENDO</span><span class="badge tipo">Apartamento</span><span class="badge">Confianza Alta</span></div>
-        </div>
-        <div class="afinidad">
-          <span class="n">100%</span>
-          <span class="t">de afinidad<br>81% del peso evaluado</span>
-        </div>
-      </div>
-
-      <div class="match-grid">
-        <div class="lado pide">
-          <h4>Lo que pide el cliente</h4>
-      <div class="kv"><span class="k">Operación</span><span class="v">ARRIENDO</span></div>
-      <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
-      <div class="kv"><span class="k">Zona pedida</span><span class="v">Santa Bárbara Central</span></div>
-      <div class="kv"><span class="k">Área mínima</span><span class="v sin">No informado</span></div>
-      <div class="kv"><span class="k">Habitaciones</span><span class="v">3</span></div>
-      <div class="kv"><span class="k">Baños</span><span class="v sin">No informado</span></div>
-      <div class="kv"><span class="k">Parqueadero</span><span class="v sin">No informado</span></div>
-      <div class="kv"><span class="k">Presupuesto</span><span class="v">$6.500.000/mes</span></div>
-        </div>
-        <div class="vs">VS</div>
-        <div class="lado oferta-lado">
-          <h4>La oferta que encaja</h4>
-      <div class="kv"><span class="k">Operación</span><span class="v">ARRIENDO</span></div>
-      <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
-      <div class="kv"><span class="k">Zona</span><span class="v">Santa Bárbara</span></div>
-      <div class="kv"><span class="k">Área</span><span class="v">233 m²</span></div>
-      <div class="kv"><span class="k">Habitaciones</span><span class="v">3</span></div>
-      <div class="kv"><span class="k">Baños</span><span class="v">2</span></div>
-      <div class="kv"><span class="k">Parqueadero</span><span class="v">2</span></div>
-      <div class="kv"><span class="k">Estrato</span><span class="v">6</span></div>
-      <div class="kv"><span class="k">Precio publicado</span><span class="v">$6.500.000/mes</span></div>
-      <div class="kv"><span class="k">Diferencia</span><span class="v">+0,0% vs presupuesto</span></div>
-        </div>
-      </div>
-
-      <div class="match-score">
-        <h4>C&oacute;mo se reparte el puntaje</h4>
-        <div class="barra-sc"><span class="barra-nombre">Precio (50)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
-        <div class="barra-sc"><span class="barra-nombre">Zona (20)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
-        <div class="barra-sc"><span class="barra-nombre">Habitaciones (10)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
-        <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
-        <p class="nota-score">zona exacta: santa barbara &middot; criterios comparados:
-          precio, zona, hab, tipo &middot; se evaluaron 692 ofertas para este
-          requerimiento.</p>
-      </div>
-
-      <div class="match-pie">
-        <a class="btn sec" href="index.html#ofertas">Ver ofertas publicadas</a>
-        <a class="btn sec" href="busquedas.html" target="_blank" rel="noopener">Compradores buscando &#8599;</a>
-        <a class="btn sec" href="https://info.wasi.co/apartamento-alquiler-santa-bárbara-bogotá-d-c/10026894" target="_blank" rel="noopener">Ver la oferta &#8599;</a>
-      </div>
-    </article>
-
-    <article class="match-card reveal">
-      <div class="match-head">
-        <div>
-          <p class="eyebrow" style="margin-bottom:8px">Match #3</p>
           <div class="badges"><span class="badge op-venta">ARRIENDO</span><span class="badge tipo">Apto</span><span class="badge">Confianza Alta</span></div>
         </div>
         <div class="afinidad">
@@ -707,7 +675,7 @@ table.int a{color:var(--acento);text-decoration:underline}
         <div class="barra-sc"><span class="barra-nombre">Parqueo (1,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <p class="nota-score">zona exacta: la carolina &middot; criterios comparados:
-          precio, zona, area, parqueo, tipo &middot; se evaluaron 692 ofertas para este
+          precio, zona, area, parqueo, tipo &middot; se evaluaron 674 ofertas para este
           requerimiento.</p>
       </div>
 
@@ -715,6 +683,64 @@ table.int a{color:var(--acento);text-decoration:underline}
         <a class="btn sec" href="index.html#ofertas">Ver ofertas publicadas</a>
         <a class="btn sec" href="busquedas.html" target="_blank" rel="noopener">Compradores buscando &#8599;</a>
         <a class="btn sec" href="https://info.wasi.co/apartamento-venta-alquiler-la-carolina-bogotá-d-c/10405320" target="_blank" rel="noopener">Ver la oferta &#8599;</a>
+      </div>
+    </article>
+
+    <article class="match-card reveal">
+      <div class="match-head">
+        <div>
+          <p class="eyebrow" style="margin-bottom:8px">Match #3</p>
+          <div class="badges"><span class="badge op-venta">ARRIENDO</span><span class="badge tipo">Apto</span><span class="badge">Confianza Alta</span></div>
+        </div>
+        <div class="afinidad">
+          <span class="n">100%</span>
+          <span class="t">de afinidad<br>81% del peso evaluado</span>
+        </div>
+      </div>
+
+      <div class="match-grid">
+        <div class="lado pide">
+          <h4>Lo que pide el cliente</h4>
+      <div class="kv"><span class="k">Operación</span><span class="v">ARRIENDO</span></div>
+      <div class="kv"><span class="k">Tipo</span><span class="v">Apto</span></div>
+      <div class="kv"><span class="k">Zona pedida</span><span class="v">Virrey</span></div>
+      <div class="kv"><span class="k">Área mínima</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Baños</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Parqueadero</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Presupuesto</span><span class="v">$9.500.000/mes</span></div>
+        </div>
+        <div class="vs">VS</div>
+        <div class="lado oferta-lado">
+          <h4>La oferta que encaja</h4>
+      <div class="kv"><span class="k">Operación</span><span class="v">ARRIENDO</span></div>
+      <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
+      <div class="kv"><span class="k">Zona</span><span class="v">Virrey</span></div>
+      <div class="kv"><span class="k">Área</span><span class="v">105 m²</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Baños</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Parqueadero</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Estrato</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Precio publicado</span><span class="v">$9.500.000/mes</span></div>
+      <div class="kv"><span class="k">Diferencia</span><span class="v">+0,0% vs presupuesto</span></div>
+        </div>
+      </div>
+
+      <div class="match-score">
+        <h4>C&oacute;mo se reparte el puntaje</h4>
+        <div class="barra-sc"><span class="barra-nombre">Precio (50)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Zona (20)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Habitaciones (10)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <p class="nota-score">zona exacta: virrey &middot; criterios comparados:
+          precio, zona, hab, tipo &middot; se evaluaron 674 ofertas para este
+          requerimiento.</p>
+      </div>
+
+      <div class="match-pie">
+        <a class="btn sec" href="index.html#ofertas">Ver ofertas publicadas</a>
+        <a class="btn sec" href="busquedas.html" target="_blank" rel="noopener">Compradores buscando &#8599;</a>
+        <a class="btn sec" href="https://info.wasi.co/apartamento-alquiler-virrey-bogota-dc/10495616" target="_blank" rel="noopener">Ver la oferta &#8599;</a>
       </div>
     </article>
   </div>

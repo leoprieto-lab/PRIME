@@ -8,7 +8,7 @@
 <meta property="og:title" content="Prime Propiedades — Matchmaker inmobiliario">
 <meta property="og:description" content="Oferta y requerimiento, uno frente al otro: mide la afinidad de cada match y solicita el servicio para tus clientes.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="images/logoPrime.jpg">
+<meta property="og:image" content="https://leoprieto-lab.github.io/PRIME/images/logoPrime.jpg">
 <link rel="icon" href="images/logoPrime.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,6 +132,14 @@ section{padding:86px 0}
   border-radius:7px;background:#fff;color:var(--tinta);min-width:150px}
 .ghost:focus{outline:none;border-color:var(--acento)}
 .toolbar .buscar{flex:1 1 210px;min-width:180px}
+/* Sugerencias del buscador (número de oferta y texto): popup fijo, no
+   afecta el flex de la barra de filtros. */
+.sug-ofertas{position:fixed;z-index:300;background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:10px;box-shadow:0 12px 28px rgba(0,0,0,.14);max-width:340px;overflow:hidden}
+.sug-ofertas button{display:block;width:100%;text-align:left;border:0;background:none;padding:9px 12px;font:inherit;font-size:12.5px;cursor:pointer;border-bottom:1px solid rgba(0,0,0,.06);color:inherit}
+.sug-ofertas button:last-child{border-bottom:0}
+.sug-ofertas button:hover{background:#f6f3ee}
+.sug-ofertas .sug-id{font-weight:600;white-space:nowrap}
+.sug-ofertas .sug-det{color:#7a7a7a;font-size:11.5px}
 .toolbar .empuje{margin-left:auto}
 .segmento{display:inline-flex;align-items:center;gap:6px}
 .segmento i{font-style:normal;color:var(--suave)}
@@ -482,7 +490,7 @@ table.int a{color:var(--acento);text-decoration:underline}
       Ver los 3 ejemplos
       <svg width="26" height="8" viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 4h23M20 1l4 3-4 3"/></svg>
     </a>
-    <div class="hero-sello reveal"><span class="sello">Corte del 22/10/2026 &middot; 4.258 ofertas &middot; 2623 requerimientos</span></div>
+    <div class="hero-sello reveal"><span class="sello">Corte del 27/10/2026 &middot; 3.142 ofertas &middot; 2875 requerimientos</span></div>
   </div>
 </section>
 
@@ -493,15 +501,15 @@ table.int a{color:var(--acento);text-decoration:underline}
     <h2 class="titulo-seccion reveal">Oferta y demanda, en n&uacute;meros</h2>
 
     <div class="cifras cuatro reveal">
-      <div class="cifra"><div class="n">4.258</div><div class="t">ofertas &uacute;nicas</div></div>
-      <div class="cifra"><div class="n">2623</div><div class="t">requerimientos</div></div>
-      <div class="cifra"><div class="n">1741</div><div class="t">con match &ge; 75%</div></div>
-      <div class="cifra"><div class="n">69,9%</div><div class="t">de cobertura</div></div>
+      <div class="cifra"><div class="n">3.142</div><div class="t">ofertas &uacute;nicas</div></div>
+      <div class="cifra"><div class="n">2875</div><div class="t">requerimientos</div></div>
+      <div class="cifra"><div class="n">1942</div><div class="t">con match &ge; 75%</div></div>
+      <div class="cifra"><div class="n">71,1%</div><div class="t">de cobertura</div></div>
     </div>
 
     <div class="reveal">
-      <p class="barras-titulo">Afinidad del mejor match por requerimiento (12340 pares evaluados)</p>
-      <div class="barra"><span class="barra-nombre"><45%</span><span class="fondo"><span class="relleno" style="width:2%"></span></span></div>      <div class="barra"><span class="barra-nombre">45-55%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">55-65%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">65-75%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">75-85%</span><span class="fondo"><span class="relleno" style="width:6%"></span></span></div>      <div class="barra"><span class="barra-nombre">85-95%</span><span class="fondo"><span class="relleno" style="width:14%"></span></span></div>      <div class="barra"><span class="barra-nombre">95-100%</span><span class="fondo"><span class="relleno" style="width:100%"></span></span></div>
+      <p class="barras-titulo">Afinidad del mejor match por requerimiento (13540 pares evaluados)</p>
+      <div class="barra"><span class="barra-nombre"><45%</span><span class="fondo"><span class="relleno" style="width:2%"></span></span></div>      <div class="barra"><span class="barra-nombre">45-55%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">55-65%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">65-75%</span><span class="fondo"><span class="relleno" style="width:2%"></span></span></div>      <div class="barra"><span class="barra-nombre">75-85%</span><span class="fondo"><span class="relleno" style="width:9%"></span></span></div>      <div class="barra"><span class="barra-nombre">85-95%</span><span class="fondo"><span class="relleno" style="width:17%"></span></span></div>      <div class="barra"><span class="barra-nombre">95-100%</span><span class="fondo"><span class="relleno" style="width:100%"></span></span></div>
     </div>
   </div>
 </section>
@@ -572,38 +580,38 @@ table.int a{color:var(--acento);text-decoration:underline}
       <div class="match-head">
         <div>
           <p class="eyebrow" style="margin-bottom:8px">Match #1</p>
-          <div class="badges"><span class="badge op-venta">ARRIENDO</span><span class="badge tipo">Apartamento</span><span class="badge">Confianza Alta</span></div>
+          <div class="badges"><span class="badge op-venta">COMPRA</span><span class="badge tipo">Apartamento</span><span class="badge">Confianza Alta</span></div>
         </div>
         <div class="afinidad">
           <span class="n">100%</span>
-          <span class="t">de afinidad<br>95% del peso evaluado</span>
+          <span class="t">de afinidad<br>81% del peso evaluado</span>
         </div>
       </div>
 
       <div class="match-grid">
         <div class="lado pide">
           <h4>Lo que pide el cliente</h4>
-      <div class="kv"><span class="k">Operación</span><span class="v">ARRIENDO</span></div>
+      <div class="kv"><span class="k">Operación</span><span class="v">COMPRA</span></div>
       <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
-      <div class="kv"><span class="k">Zona pedida</span><span class="v">Cabrera, Virrey O Chicó Reservado</span></div>
-      <div class="kv"><span class="k">Área mínima</span><span class="v">180 m²</span></div>
-      <div class="kv"><span class="k">Habitaciones</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Zona pedida</span><span class="v">Cedritos</span></div>
+      <div class="kv"><span class="k">Área mínima</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v">2</span></div>
       <div class="kv"><span class="k">Baños</span><span class="v sin">No informado</span></div>
       <div class="kv"><span class="k">Parqueadero</span><span class="v sin">No informado</span></div>
-      <div class="kv"><span class="k">Presupuesto</span><span class="v">$13.000.000/mes</span></div>
+      <div class="kv"><span class="k">Presupuesto</span><span class="v">$650 M</span></div>
         </div>
         <div class="vs">VS</div>
         <div class="lado oferta-lado">
           <h4>La oferta que encaja</h4>
-      <div class="kv"><span class="k">Operación</span><span class="v">ARRIENDO</span></div>
+      <div class="kv"><span class="k">Operación</span><span class="v">VENTA</span></div>
       <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
-      <div class="kv"><span class="k">Zona</span><span class="v">Virrey</span></div>
-      <div class="kv"><span class="k">Área</span><span class="v">164 m²</span></div>
-      <div class="kv"><span class="k">Habitaciones</span><span class="v">3</span></div>
-      <div class="kv"><span class="k">Baños</span><span class="v">4</span></div>
-      <div class="kv"><span class="k">Parqueadero</span><span class="v">3</span></div>
-      <div class="kv"><span class="k">Estrato</span><span class="v">5</span></div>
-      <div class="kv"><span class="k">Precio publicado</span><span class="v">$13.000.000/mes</span></div>
+      <div class="kv"><span class="k">Zona</span><span class="v">Cedritos</span></div>
+      <div class="kv"><span class="k">Área</span><span class="v">70 m²</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Baños</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Parqueadero</span><span class="v">1</span></div>
+      <div class="kv"><span class="k">Estrato</span><span class="v">4</span></div>
+      <div class="kv"><span class="k">Precio publicado</span><span class="v">$650 M</span></div>
       <div class="kv"><span class="k">Diferencia</span><span class="v">+0,0% vs presupuesto</span></div>
         </div>
       </div>
@@ -612,18 +620,17 @@ table.int a{color:var(--acento);text-decoration:underline}
         <h4>C&oacute;mo se reparte el puntaje</h4>
         <div class="barra-sc"><span class="barra-nombre">Precio (50)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <div class="barra-sc"><span class="barra-nombre">Zona (20)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
-        <div class="barra-sc"><span class="barra-nombre">Área (15)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <div class="barra-sc"><span class="barra-nombre">Habitaciones (10)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
-        <p class="nota-score">zona exacta: virrey &middot; criterios comparados:
-          precio, zona, area, hab, tipo &middot; se evaluaron 674 ofertas para este
+        <p class="nota-score">zona exacta: cedritos &middot; criterios comparados:
+          precio, zona, hab, tipo &middot; se evaluaron 1998 ofertas para este
           requerimiento.</p>
       </div>
 
       <div class="match-pie">
         <a class="btn sec" href="index.html#ofertas">Ver ofertas publicadas</a>
         <a class="btn sec" href="busquedas.html" target="_blank" rel="noopener">Compradores buscando &#8599;</a>
-        <a class="btn sec" href="https://info.wasi.co/apartamento-alquiler-virrey-bogotá-d-c/10405526" target="_blank" rel="noopener">Ver la oferta &#8599;</a>
+        <a class="btn sec" href="https://info.wasi.co/apartamento-venta-cedritos-bogotá-d-c/10294585" target="_blank" rel="noopener">Ver la oferta &#8599;</a>
       </div>
     </article>
 
@@ -675,7 +682,7 @@ table.int a{color:var(--acento);text-decoration:underline}
         <div class="barra-sc"><span class="barra-nombre">Parqueo (1,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <p class="nota-score">zona exacta: la carolina &middot; criterios comparados:
-          precio, zona, area, parqueo, tipo &middot; se evaluaron 674 ofertas para este
+          precio, zona, area, parqueo, tipo &middot; se evaluaron 421 ofertas para este
           requerimiento.</p>
       </div>
 
@@ -733,7 +740,7 @@ table.int a{color:var(--acento);text-decoration:underline}
         <div class="barra-sc"><span class="barra-nombre">Habitaciones (10)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <p class="nota-score">zona exacta: virrey &middot; criterios comparados:
-          precio, zona, hab, tipo &middot; se evaluaron 674 ofertas para este
+          precio, zona, hab, tipo &middot; se evaluaron 421 ofertas para este
           requerimiento.</p>
       </div>
 

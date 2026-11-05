@@ -340,7 +340,7 @@ section{padding:86px 0}
 /* ── COMPONENTES DEL MATCH ── */
 
 /* ── CIFRAS (4 columnas) ── */
-.cifras.cuatro{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.cifras.cuatro{grid-template-columns:repeat(4,minmax(0,1fr))}
 
 /* ── PASOS ── */
 .pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:20px}
@@ -404,11 +404,19 @@ section{padding:86px 0}
   border-radius:50%;background:var(--acento)}
 
 /* ── PAGINA INTERNA DE ASESORES ── */
-.aviso{background:#b03030;color:#fff;text-align:center;padding:9px 20px;
+.aviso{background:#7f1d1d;color:#fff;text-align:center;padding:9px 20px;
   font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;position:fixed;
   top:0;left:0;right:0;z-index:80}
+html.interna .menu a,
+html.interna .menu a:visited{color:#242424}
+html.interna .menu a:hover,
+html.interna .menu a:focus-visible{color:#5c4118}
+html.interna .menu a.dest{color:#5c4118;border-color:#8b6b32}
+html.interna .menu a.dest:hover,
+html.interna .menu a.dest:focus-visible{background:#5c4118;color:#fff}
 html.interna #site-header{top:34px}
-html.interna .hero{padding-top:186px}
+html.interna .hero{padding-top:136px}
+html.interna .reveal{opacity:1;transform:none}
 .tabla-wrap{background:#fff;border:1px solid var(--linea);border-radius:14px;
   overflow:auto;max-height:640px;box-shadow:0 24px 48px -40px rgba(20,20,20,.55)}
 table.int{width:100%;border-collapse:collapse;font-size:.82rem}
@@ -433,11 +441,18 @@ table.int a{color:var(--acento);text-decoration:underline}
 .tabla-titulo{display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;
   justify-content:space-between;margin:44px 0 14px}
 .tabla-titulo h3{font-size:1.35rem}
+@media (max-width:900px){
+  .cifras.cuatro{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 @media (max-width:640px){
   .aviso{position:static}
   html.interna #site-header{top:0}
   html.interna .hero{padding-top:132px}
+  .cifras.cuatro{grid-template-columns:minmax(0,1fr)}
   table.int{font-size:.78rem}
+}
+@media (max-width:760px){
+  .cons-detalle{padding:17px}
 }
 
 </style>
@@ -490,7 +505,7 @@ table.int a{color:var(--acento);text-decoration:underline}
       Ver los 3 ejemplos
       <svg width="26" height="8" viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 4h23M20 1l4 3-4 3"/></svg>
     </a>
-    <div class="hero-sello reveal"><span class="sello">Corte del 27/10/2026 &middot; 3.142 ofertas &middot; 2875 requerimientos</span></div>
+    <div class="hero-sello reveal"><span class="sello">Corte del 05/11/2026 &middot; 3.245 ofertas &middot; 2996 requerimientos</span></div>
   </div>
 </section>
 
@@ -501,15 +516,15 @@ table.int a{color:var(--acento);text-decoration:underline}
     <h2 class="titulo-seccion reveal">Oferta y demanda, en n&uacute;meros</h2>
 
     <div class="cifras cuatro reveal">
-      <div class="cifra"><div class="n">3.142</div><div class="t">ofertas &uacute;nicas</div></div>
-      <div class="cifra"><div class="n">2875</div><div class="t">requerimientos</div></div>
-      <div class="cifra"><div class="n">1942</div><div class="t">con match &ge; 75%</div></div>
-      <div class="cifra"><div class="n">71,1%</div><div class="t">de cobertura</div></div>
+      <div class="cifra"><div class="n">3.245</div><div class="t">ofertas &uacute;nicas</div></div>
+      <div class="cifra"><div class="n">2996</div><div class="t">requerimientos</div></div>
+      <div class="cifra"><div class="n">2065</div><div class="t">con match &ge; 75%</div></div>
+      <div class="cifra"><div class="n">72,5%</div><div class="t">de cobertura</div></div>
     </div>
 
     <div class="reveal">
-      <p class="barras-titulo">Afinidad del mejor match por requerimiento (13540 pares evaluados)</p>
-      <div class="barra"><span class="barra-nombre"><45%</span><span class="fondo"><span class="relleno" style="width:2%"></span></span></div>      <div class="barra"><span class="barra-nombre">45-55%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">55-65%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">65-75%</span><span class="fondo"><span class="relleno" style="width:2%"></span></span></div>      <div class="barra"><span class="barra-nombre">75-85%</span><span class="fondo"><span class="relleno" style="width:9%"></span></span></div>      <div class="barra"><span class="barra-nombre">85-95%</span><span class="fondo"><span class="relleno" style="width:17%"></span></span></div>      <div class="barra"><span class="barra-nombre">95-100%</span><span class="fondo"><span class="relleno" style="width:100%"></span></span></div>
+      <p class="barras-titulo">Afinidad del mejor match por requerimiento (14120 pares evaluados)</p>
+      <div class="barra"><span class="barra-nombre"><45%</span><span class="fondo"><span class="relleno" style="width:3%"></span></span></div>      <div class="barra"><span class="barra-nombre">45-55%</span><span class="fondo"><span class="relleno" style="width:0%"></span></span></div>      <div class="barra"><span class="barra-nombre">55-65%</span><span class="fondo"><span class="relleno" style="width:1%"></span></span></div>      <div class="barra"><span class="barra-nombre">65-75%</span><span class="fondo"><span class="relleno" style="width:2%"></span></span></div>      <div class="barra"><span class="barra-nombre">75-85%</span><span class="fondo"><span class="relleno" style="width:8%"></span></span></div>      <div class="barra"><span class="barra-nombre">85-95%</span><span class="fondo"><span class="relleno" style="width:18%"></span></span></div>      <div class="barra"><span class="barra-nombre">95-100%</span><span class="fondo"><span class="relleno" style="width:100%"></span></span></div>
     </div>
   </div>
 </section>
@@ -623,7 +638,7 @@ table.int a{color:var(--acento);text-decoration:underline}
         <div class="barra-sc"><span class="barra-nombre">Habitaciones (10)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <p class="nota-score">zona exacta: cedritos &middot; criterios comparados:
-          precio, zona, hab, tipo &middot; se evaluaron 1998 ofertas para este
+          precio, zona, hab, tipo &middot; se evaluaron 2033 ofertas para este
           requerimiento.</p>
       </div>
 
@@ -638,66 +653,7 @@ table.int a{color:var(--acento);text-decoration:underline}
       <div class="match-head">
         <div>
           <p class="eyebrow" style="margin-bottom:8px">Match #2</p>
-          <div class="badges"><span class="badge op-venta">ARRIENDO</span><span class="badge tipo">Apto</span><span class="badge">Confianza Alta</span></div>
-        </div>
-        <div class="afinidad">
-          <span class="n">100%</span>
-          <span class="t">de afinidad<br>87% del peso evaluado</span>
-        </div>
-      </div>
-
-      <div class="match-grid">
-        <div class="lado pide">
-          <h4>Lo que pide el cliente</h4>
-      <div class="kv"><span class="k">Operación</span><span class="v">ARRIENDO</span></div>
-      <div class="kv"><span class="k">Tipo</span><span class="v">Apto</span></div>
-      <div class="kv"><span class="k">Zona pedida</span><span class="v">La Carolina</span></div>
-      <div class="kv"><span class="k">Área mínima</span><span class="v">200 m²</span></div>
-      <div class="kv"><span class="k">Habitaciones</span><span class="v sin">No informado</span></div>
-      <div class="kv"><span class="k">Baños</span><span class="v sin">No informado</span></div>
-      <div class="kv"><span class="k">Parqueadero</span><span class="v">2</span></div>
-      <div class="kv"><span class="k">Presupuesto</span><span class="v">$15.000.000/mes</span></div>
-        </div>
-        <div class="vs">VS</div>
-        <div class="lado oferta-lado">
-          <h4>La oferta que encaja</h4>
-      <div class="kv"><span class="k">Operación</span><span class="v">AMBAS</span></div>
-      <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
-      <div class="kv"><span class="k">Zona</span><span class="v">La Carolina</span></div>
-      <div class="kv"><span class="k">Área</span><span class="v">187 m²</span></div>
-      <div class="kv"><span class="k">Habitaciones</span><span class="v">3</span></div>
-      <div class="kv"><span class="k">Baños</span><span class="v">4</span></div>
-      <div class="kv"><span class="k">Parqueadero</span><span class="v">4</span></div>
-      <div class="kv"><span class="k">Estrato</span><span class="v">6</span></div>
-      <div class="kv"><span class="k">Precio publicado</span><span class="v">$15.000.000/mes</span></div>
-      <div class="kv"><span class="k">Diferencia</span><span class="v">+0,0% vs presupuesto</span></div>
-        </div>
-      </div>
-
-      <div class="match-score">
-        <h4>C&oacute;mo se reparte el puntaje</h4>
-        <div class="barra-sc"><span class="barra-nombre">Precio (50)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
-        <div class="barra-sc"><span class="barra-nombre">Zona (20)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
-        <div class="barra-sc"><span class="barra-nombre">Área (15)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
-        <div class="barra-sc"><span class="barra-nombre">Parqueo (1,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
-        <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
-        <p class="nota-score">zona exacta: la carolina &middot; criterios comparados:
-          precio, zona, area, parqueo, tipo &middot; se evaluaron 421 ofertas para este
-          requerimiento.</p>
-      </div>
-
-      <div class="match-pie">
-        <a class="btn sec" href="index.html#ofertas">Ver ofertas publicadas</a>
-        <a class="btn sec" href="busquedas.html" target="_blank" rel="noopener">Compradores buscando &#8599;</a>
-        <a class="btn sec" href="https://info.wasi.co/apartamento-venta-alquiler-la-carolina-bogotá-d-c/10405320" target="_blank" rel="noopener">Ver la oferta &#8599;</a>
-      </div>
-    </article>
-
-    <article class="match-card reveal">
-      <div class="match-head">
-        <div>
-          <p class="eyebrow" style="margin-bottom:8px">Match #3</p>
-          <div class="badges"><span class="badge op-venta">ARRIENDO</span><span class="badge tipo">Apto</span><span class="badge">Confianza Alta</span></div>
+          <div class="badges"><span class="badge op-venta">ARRIENDO</span><span class="badge tipo">Apartamento</span><span class="badge">Confianza Alta</span></div>
         </div>
         <div class="afinidad">
           <span class="n">100%</span>
@@ -709,26 +665,26 @@ table.int a{color:var(--acento);text-decoration:underline}
         <div class="lado pide">
           <h4>Lo que pide el cliente</h4>
       <div class="kv"><span class="k">Operación</span><span class="v">ARRIENDO</span></div>
-      <div class="kv"><span class="k">Tipo</span><span class="v">Apto</span></div>
-      <div class="kv"><span class="k">Zona pedida</span><span class="v">Virrey</span></div>
+      <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
+      <div class="kv"><span class="k">Zona pedida</span><span class="v">Rosales</span></div>
       <div class="kv"><span class="k">Área mínima</span><span class="v sin">No informado</span></div>
-      <div class="kv"><span class="k">Habitaciones</span><span class="v">2</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v">3</span></div>
       <div class="kv"><span class="k">Baños</span><span class="v sin">No informado</span></div>
       <div class="kv"><span class="k">Parqueadero</span><span class="v sin">No informado</span></div>
-      <div class="kv"><span class="k">Presupuesto</span><span class="v">$9.500.000/mes</span></div>
+      <div class="kv"><span class="k">Presupuesto</span><span class="v">$20.000.000/mes</span></div>
         </div>
         <div class="vs">VS</div>
         <div class="lado oferta-lado">
           <h4>La oferta que encaja</h4>
       <div class="kv"><span class="k">Operación</span><span class="v">ARRIENDO</span></div>
       <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
-      <div class="kv"><span class="k">Zona</span><span class="v">Virrey</span></div>
-      <div class="kv"><span class="k">Área</span><span class="v">105 m²</span></div>
-      <div class="kv"><span class="k">Habitaciones</span><span class="v">2</span></div>
-      <div class="kv"><span class="k">Baños</span><span class="v">2</span></div>
-      <div class="kv"><span class="k">Parqueadero</span><span class="v">2</span></div>
-      <div class="kv"><span class="k">Estrato</span><span class="v sin">No informado</span></div>
-      <div class="kv"><span class="k">Precio publicado</span><span class="v">$9.500.000/mes</span></div>
+      <div class="kv"><span class="k">Zona</span><span class="v">Rosales</span></div>
+      <div class="kv"><span class="k">Área</span><span class="v">232 m²</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v">3</span></div>
+      <div class="kv"><span class="k">Baños</span><span class="v">5</span></div>
+      <div class="kv"><span class="k">Parqueadero</span><span class="v">3</span></div>
+      <div class="kv"><span class="k">Estrato</span><span class="v">6</span></div>
+      <div class="kv"><span class="k">Precio publicado</span><span class="v">$20.000.000/mes</span></div>
       <div class="kv"><span class="k">Diferencia</span><span class="v">+0,0% vs presupuesto</span></div>
         </div>
       </div>
@@ -739,15 +695,74 @@ table.int a{color:var(--acento);text-decoration:underline}
         <div class="barra-sc"><span class="barra-nombre">Zona (20)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <div class="barra-sc"><span class="barra-nombre">Habitaciones (10)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
         <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
-        <p class="nota-score">zona exacta: virrey &middot; criterios comparados:
-          precio, zona, hab, tipo &middot; se evaluaron 421 ofertas para este
+        <p class="nota-score">zona exacta: rosales &middot; criterios comparados:
+          precio, zona, hab, tipo &middot; se evaluaron 405 ofertas para este
           requerimiento.</p>
       </div>
 
       <div class="match-pie">
         <a class="btn sec" href="index.html#ofertas">Ver ofertas publicadas</a>
         <a class="btn sec" href="busquedas.html" target="_blank" rel="noopener">Compradores buscando &#8599;</a>
-        <a class="btn sec" href="https://info.wasi.co/apartamento-alquiler-virrey-bogota-dc/10495616" target="_blank" rel="noopener">Ver la oferta &#8599;</a>
+        <a class="btn sec" href="https://info.wasi.co/apartamento-alquiler-rosales-bogotá-d-c/10509564" target="_blank" rel="noopener">Ver la oferta &#8599;</a>
+      </div>
+    </article>
+
+    <article class="match-card reveal">
+      <div class="match-head">
+        <div>
+          <p class="eyebrow" style="margin-bottom:8px">Match #3</p>
+          <div class="badges"><span class="badge op-venta">ARRIENDO</span><span class="badge tipo">Apartamento</span><span class="badge">Confianza Alta</span></div>
+        </div>
+        <div class="afinidad">
+          <span class="n">100%</span>
+          <span class="t">de afinidad<br>95% del peso evaluado</span>
+        </div>
+      </div>
+
+      <div class="match-grid">
+        <div class="lado pide">
+          <h4>Lo que pide el cliente</h4>
+      <div class="kv"><span class="k">Operación</span><span class="v">ARRIENDO</span></div>
+      <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
+      <div class="kv"><span class="k">Zona pedida</span><span class="v">Cabrera, Virrey O Chicó Reservado</span></div>
+      <div class="kv"><span class="k">Área mínima</span><span class="v">180 m²</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Baños</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Parqueadero</span><span class="v sin">No informado</span></div>
+      <div class="kv"><span class="k">Presupuesto</span><span class="v">$13.000.000/mes</span></div>
+        </div>
+        <div class="vs">VS</div>
+        <div class="lado oferta-lado">
+          <h4>La oferta que encaja</h4>
+      <div class="kv"><span class="k">Operación</span><span class="v">ARRIENDO</span></div>
+      <div class="kv"><span class="k">Tipo</span><span class="v">Apartamento</span></div>
+      <div class="kv"><span class="k">Zona</span><span class="v">Virrey</span></div>
+      <div class="kv"><span class="k">Área</span><span class="v">164 m²</span></div>
+      <div class="kv"><span class="k">Habitaciones</span><span class="v">3</span></div>
+      <div class="kv"><span class="k">Baños</span><span class="v">4</span></div>
+      <div class="kv"><span class="k">Parqueadero</span><span class="v">3</span></div>
+      <div class="kv"><span class="k">Estrato</span><span class="v">5</span></div>
+      <div class="kv"><span class="k">Precio publicado</span><span class="v">$13.000.000/mes</span></div>
+      <div class="kv"><span class="k">Diferencia</span><span class="v">+0,0% vs presupuesto</span></div>
+        </div>
+      </div>
+
+      <div class="match-score">
+        <h4>C&oacute;mo se reparte el puntaje</h4>
+        <div class="barra-sc"><span class="barra-nombre">Precio (50)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Zona (20)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Área (15)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Habitaciones (10)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <div class="barra-sc"><span class="barra-nombre">Tipo (0,5)</span><span class="fondo"><span class="relleno" style="width:100%"></span></span><span class="pct">100%</span></div>
+        <p class="nota-score">zona exacta: virrey &middot; criterios comparados:
+          precio, zona, area, hab, tipo &middot; se evaluaron 405 ofertas para este
+          requerimiento.</p>
+      </div>
+
+      <div class="match-pie">
+        <a class="btn sec" href="index.html#ofertas">Ver ofertas publicadas</a>
+        <a class="btn sec" href="busquedas.html" target="_blank" rel="noopener">Compradores buscando &#8599;</a>
+        <a class="btn sec" href="https://info.wasi.co/apartamento-alquiler-virrey-bogotá-d-c/10405526" target="_blank" rel="noopener">Ver la oferta &#8599;</a>
       </div>
     </article>
   </div>
